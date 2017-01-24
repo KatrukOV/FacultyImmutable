@@ -2,8 +2,8 @@ package com.katruk.service.impl;
 
 import com.katruk.dao.StudentDao;
 import com.katruk.dao.mysql.StudentDaoMySql;
-import com.katruk.entity.Student;
 import com.katruk.entity.User;
+import com.katruk.entity.Student;
 import com.katruk.exception.DaoException;
 import com.katruk.exception.ServiceException;
 import com.katruk.service.StudentService;

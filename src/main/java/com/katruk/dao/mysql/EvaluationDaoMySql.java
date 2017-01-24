@@ -8,6 +8,9 @@ import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
 import com.katruk.entity.Evaluation;
 import com.katruk.entity.Student;
 import com.katruk.entity.Subject;
+import com.katruk.entity.impl.BaseEvaluation;
+import com.katruk.entity.impl.BaseStudent;
+import com.katruk.entity.impl.BaseSubject;
 import com.katruk.exception.DaoException;
 import com.katruk.util.ConnectionPool;
 import com.katruk.util.Sql;
@@ -216,9 +219,9 @@ public final class EvaluationDaoMySql implements EvaluationDao, DataBaseNames {
 
   private Evaluation getEvaluation(final ResultSet resultSet) throws SQLException {
     Long subjectId = resultSet.getLong(SUBJECT_ID);
-    Subject subject = new Subject(subjectId);
+    Subject subject = new BaseSubject(subjectId);
     Long studentId = resultSet.getLong(STUDENT_ID);
-    Student student = new Student(studentId);
+    Student student = new BaseStudent(studentId);
     Long id = resultSet.getLong(ID);
     Evaluation.Status status = null;
     if (nonNull(resultSet.getString(STATUS))) {
@@ -229,6 +232,6 @@ public final class EvaluationDaoMySql implements EvaluationDao, DataBaseNames {
       rating = Evaluation.Rating.valueOf(resultSet.getString(RATING));
     }
     String feedback = resultSet.getString(FEEDBACK);
-    return new Evaluation(id, subject, student, status, rating, feedback);
+    return new BaseEvaluation(id, subject, student, status, rating, feedback);
   }
 }

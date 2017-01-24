@@ -3,6 +3,7 @@ package com.katruk.service.impl;
 import com.katruk.dao.PersonDao;
 import com.katruk.dao.mysql.PersonDaoMySql;
 import com.katruk.entity.Person;
+import com.katruk.entity.impl.BasePerson;
 import com.katruk.exception.DaoException;
 import com.katruk.exception.ServiceException;
 import com.katruk.service.PersonService;
@@ -23,11 +24,11 @@ final class PersonServiceImpl implements PersonService {
   }
 
   @Override
-  public Person getPersonById(Long personId) throws ServiceException {
-    final Person person;
+  public BasePerson getPersonById(Long personId) throws ServiceException {
+    final BasePerson person;
     try {
       person = this.personDao.getPersonById(personId)
-          .orElseThrow(() -> new DaoException("Person not found", new NoSuchElementException()));
+          .orElseThrow(() -> new DaoException("BasePerson not found", new NoSuchElementException()));
     } catch (DaoException e) {
       logger.error("err", e);
       throw new ServiceException("err", e);
@@ -36,7 +37,7 @@ final class PersonServiceImpl implements PersonService {
   }
 
   @Override
-  public Person save(Person person) throws ServiceException {
+  public BasePerson save(BasePerson person) throws ServiceException {
     try {
       person = this.personDao.save(person);
     } catch (DaoException e) {

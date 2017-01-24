@@ -2,37 +2,16 @@ package com.katruk.entity;
 
 import java.sql.Date;
 
-public final class Period extends Model {
+public interface Period {
 
-  private final Status status;
-  private final Date date;
+  Status status();
 
-  public Period(Status status, Date date) {
-    super();
-    this.status = status;
-    this.date = date;
-  }
+  Date date();
 
-  public Period(Long id, Status status, Date date) {
-    super(id);
-    this.status = status;
-    this.date = date;
-  }
+  Period addId(Long id);
 
-  public enum Status {
+  enum Status {
     DISTRIBUTION,
     LEARNING
-  }
-
-  public Status status() {
-    return status;
-  }
-
-  public Date date() {
-    return date;
-  }
-
-  public Period addId(Long id) {
-    return new Period(id, this.status, this.date);
   }
 }

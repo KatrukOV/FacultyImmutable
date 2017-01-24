@@ -1,5 +1,6 @@
 package com.katruk.web.controller.commands.admin;
 
+import com.katruk.entity.impl.BasePeriod;
 import com.katruk.entity.Period;
 import com.katruk.exception.ServiceException;
 import com.katruk.service.PeriodService;
@@ -31,9 +32,9 @@ public final class SetDistribution implements Command, PageAttribute {
       period = this.periodService.getLastPeriod();
     } catch (ServiceException e) {
       logger.info("create new Period", e);
-      period = new Period(status, date);
+      period = new BasePeriod(status, date);
     }
-    period.setStatus(Period.Status.DISTRIBUTION);
+    period.setStatus(BasePeriod.Status.DISTRIBUTION);
     try {
       period = this.periodService.save(period);
       request.setAttribute(PERIOD_STATUS, period.getStatus().name());

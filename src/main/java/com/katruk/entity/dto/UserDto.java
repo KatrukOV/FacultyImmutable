@@ -1,6 +1,6 @@
 package com.katruk.entity.dto;
 
-import com.katruk.entity.User;
+import com.katruk.entity.impl.BaseUser;
 
 public final class UserDto {
 
@@ -11,7 +11,7 @@ public final class UserDto {
   private String username;
   private String password;
   private String confirmPassword;
-  private User.Role role;
+  private BaseUser.Role role;
 
   public Long getUserId() {
     return userId;
@@ -69,11 +69,11 @@ public final class UserDto {
     this.confirmPassword = confirmPassword;
   }
 
-  public User.Role getRole() {
+  public BaseUser.Role getRole() {
     return role;
   }
 
-  public void setRole(User.Role role) {
+  public void setRole(BaseUser.Role role) {
     this.role = role;
   }
 }

@@ -6,6 +6,8 @@ import com.katruk.dao.SubjectDao;
 import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
 import com.katruk.entity.Subject;
 import com.katruk.entity.Teacher;
+import com.katruk.entity.impl.BaseSubject;
+import com.katruk.entity.impl.BaseTeacher;
 import com.katruk.exception.DaoException;
 import com.katruk.util.ConnectionPool;
 import com.katruk.util.Sql;
@@ -20,7 +22,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 public final class SubjectDaoMySql implements SubjectDao, DataBaseNames {
 
@@ -212,9 +213,9 @@ public final class SubjectDaoMySql implements SubjectDao, DataBaseNames {
 
   private Subject getSubject(ResultSet resultSet) throws SQLException {
     Long teacherId = resultSet.getLong(TEACHER_ID);
-    Teacher teacher = new Teacher(teacherId);
+    Teacher teacher = new BaseTeacher(teacherId);
     Long id = resultSet.getLong(ID);
     String title =  resultSet.getString(TITLE);
-    return new Subject(id, title, teacher);
+    return new BaseSubject(id, title, teacher);
   }
 }

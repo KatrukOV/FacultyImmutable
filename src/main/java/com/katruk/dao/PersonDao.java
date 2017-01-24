@@ -1,10 +1,10 @@
 package com.katruk.dao;
 
 import com.katruk.entity.Person;
+import com.katruk.entity.impl.BasePerson;
 import com.katruk.exception.DaoException;
 
 import java.util.Collection;
-import java.util.Optional;
 
 public interface PersonDao {
 

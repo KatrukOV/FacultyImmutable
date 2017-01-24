@@ -1,4 +1,4 @@
-package com.katruk.dao.mysql;
+package com.katruk.dao.mysql.user;
 
 import com.katruk.dao.UserDao;
 import com.katruk.entity.User;
@@ -11,20 +11,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-public final class UserDaoMySqlCache implements UserDao {
+public final class UserDaoCache implements UserDao {
 
   private final Logger logger;
-  private final UserDaoMySql userDaoMySql;
+  private final UserDao userDao;
   private final Map<Long, User> users;
 
-  public UserDaoMySqlCache() throws DaoException {
-    this.logger = Logger.getLogger(UserDaoMySqlCache.class);
-    this.userDaoMySql = new UserDaoMySql();
+  public UserDaoCache(UserDao userDao) throws DaoException {
+    this.logger = Logger.getLogger(UserDaoCache.class);
+    this.userDao = userDao;
     this.users = loadUser();
   }
 
   private Map<Long, User> loadUser() throws DaoException {
-    Collection<User> allUser = this.userDaoMySql.allUser();
+    Collection<User> allUser = this.userDao.allUser();
     Map<Long, User> result = new HashMap<>();
     for (User user : allUser) {
       this.users.put(user.id(), user);
@@ -63,7 +63,7 @@ public final class UserDaoMySqlCache implements UserDao {
 
   @Override
   public User save(final User user) throws DaoException {
-    User userInDB = this.userDaoMySql.save(user);
+    User userInDB = this.userDao.save(user);
     this.users.remove(userInDB.id());
     this.users.put(userInDB.id(), userInDB);
     return userInDB;

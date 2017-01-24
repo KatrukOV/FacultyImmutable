@@ -2,6 +2,7 @@ package com.katruk.dao.mysql;
 
 import com.katruk.dao.PeriodDao;
 import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
+import com.katruk.entity.impl.BasePeriod;
 import com.katruk.entity.Period;
 import com.katruk.exception.DaoException;
 import com.katruk.util.ConnectionPool;
@@ -18,7 +19,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 public final class PeriodDaoMySql implements PeriodDao, DataBaseNames {
 
@@ -102,6 +102,6 @@ public final class PeriodDaoMySql implements PeriodDao, DataBaseNames {
     Long id = resultSet.getLong(ID);
     Period.Status status = Period.Status.valueOf(resultSet.getString(STATUS));
     Date date = Date.valueOf(resultSet.getString(DATE));
-    return new Period(id, status, date);
+    return new BasePeriod(id, status, date);
   }
 }

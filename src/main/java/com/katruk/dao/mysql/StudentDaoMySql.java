@@ -4,8 +4,10 @@ import static java.util.Objects.nonNull;
 
 import com.katruk.dao.StudentDao;
 import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
-import com.katruk.entity.Student;
+import com.katruk.entity.impl.BaseStudent;
+import com.katruk.entity.impl.BaseUser;
 import com.katruk.entity.User;
+import com.katruk.entity.Student;
 import com.katruk.exception.DaoException;
 import com.katruk.util.ConnectionPool;
 import com.katruk.util.Sql;
@@ -19,7 +21,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 public final class StudentDaoMySql implements StudentDao, DataBaseNames {
 
@@ -137,7 +138,7 @@ public final class StudentDaoMySql implements StudentDao, DataBaseNames {
 
   private Student getStudent(ResultSet resultSet) throws SQLException {
     Long id = resultSet.getLong(USER_ID);
-    User user = new User(id);
+    User user = new BaseUser(id);
     Student.Form form = null;
     resultSet.getString(FORM);
     if (nonNull(resultSet.getString(FORM))) {
@@ -147,6 +148,6 @@ public final class StudentDaoMySql implements StudentDao, DataBaseNames {
     if (nonNull(resultSet.getString(CONTRACT))) {
       contract = (Student.Contract.valueOf(resultSet.getString(CONTRACT)));
     }
-    return new Student(id, user, form, contract);
+    return new BaseStudent(id, user, form, contract);
   }
 }

@@ -1,9 +1,11 @@
 package com.katruk.service.impl;
 
 import com.katruk.dao.UserDao;
-import com.katruk.dao.mysql.UserDaoMySql;
+import com.katruk.dao.mysql.user.UsersInMySql;
+import com.katruk.entity.impl.BaseUser;
 import com.katruk.entity.Person;
 import com.katruk.entity.User;
+import com.katruk.entity.impl.BasePerson;
 import com.katruk.exception.DaoException;
 import com.katruk.exception.ServiceException;
 import com.katruk.service.PersonService;
@@ -24,7 +26,7 @@ public final class UserServiceImpl implements UserService {
 
   public UserServiceImpl() {
     this.logger = Logger.getLogger(UserServiceImpl.class);
-    this.userDao = new UserDaoMySql();
+    this.userDao = new UsersInMySql();
     this.personService = new PersonServiceImpl();
   }
 
@@ -44,7 +46,7 @@ public final class UserServiceImpl implements UserService {
 //    }
     Collection<User> results = new ArrayList<>();
     for (User user : users) {
-      for (Person person : persons) {
+      for (BasePerson person : persons) {
         if(Objects.equals(user.id(), person.id())){
           results.add(user.changePerson(person));
         }
@@ -63,7 +65,7 @@ public final class UserServiceImpl implements UserService {
       logger.error("err", e);
       throw new ServiceException("err", e);
     }
-    final Person person = this.personService.getPersonById(user.person().id());
+    final BasePerson person = this.personService.getPersonById(user.person().id());
     return user.changePerson(person);
   }
 
@@ -77,15 +79,15 @@ public final class UserServiceImpl implements UserService {
       logger.error("err", e);
       throw new ServiceException("err", e);
     }
-    final Person person = this.personService.getPersonById(user.person().id());
+    final BasePerson person = this.personService.getPersonById(user.person().id());
     return user.changePerson(person);
   }
 
   @Override
   public User save(final User user) throws ServiceException {
-    final Person person = this.personService.save(user.person());
+    final BasePerson person = this.personService.save(user.person());
     final User userForSave =
-        new User(person.id(), person, user.username(), user.password(), user.role());
+        new BaseUser(person.id(), person, user.username(), user.password(), user.role());
     try {
       return this.userDao.save(userForSave);
     } catch (DaoException e) {

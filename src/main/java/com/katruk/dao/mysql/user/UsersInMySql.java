@@ -1,11 +1,13 @@
-package com.katruk.dao.mysql;
+package com.katruk.dao.mysql.user;
 
 import static java.util.Objects.nonNull;
 
 import com.katruk.dao.UserDao;
+import com.katruk.dao.mysql.DataBaseNames;
 import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
-import com.katruk.entity.Person;
+import com.katruk.entity.impl.BaseUser;
 import com.katruk.entity.User;
+import com.katruk.entity.impl.BasePerson;
 import com.katruk.exception.DaoException;
 import com.katruk.util.ConnectionPool;
 import com.katruk.util.Sql;
@@ -20,14 +22,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.NoSuchElementException;
 
-public final class UserDaoMySql implements UserDao, DataBaseNames {
+public final class UsersInMySql implements UserDao, DataBaseNames {
 
   private final ConnectionPool connectionPool;
   private final Logger logger;
 
-  public UserDaoMySql() throws DaoException {
+  public UsersInMySql() throws DaoException {
     this.connectionPool = ConnectionPool.getInstance();
-    this.logger = Logger.getLogger(UserDaoMySql.class);
+    this.logger = Logger.getLogger(UsersInMySql.class);
   }
 
   @Override
@@ -127,13 +129,13 @@ public final class UserDaoMySql implements UserDao, DataBaseNames {
     String lastName = resultSet.getString(LAST_NAME);
     String name = resultSet.getString(NAME);
     String patronymic = resultSet.getString(PATRONYMIC);
-    Person person = new Person(id, lastName, name, patronymic);
+    BasePerson person = new BasePerson(id, lastName, name, patronymic);
     String username = resultSet.getString(USERNAME);
     String password = resultSet.getString(PASSWORD);
-    User.Role role = null;
+    BaseUser.Role role = null;
     if (nonNull(resultSet.getString(ROLE))) {
-      role = User.Role.valueOf(resultSet.getString(ROLE));
+      role = BaseUser.Role.valueOf(resultSet.getString(ROLE));
     }
-    return new User(id, person, username, password, role);
+    return new BaseUser(id, person, username, password, role);
   }
 }

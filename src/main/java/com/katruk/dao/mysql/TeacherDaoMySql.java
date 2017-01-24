@@ -4,8 +4,10 @@ import static java.util.Objects.nonNull;
 
 import com.katruk.dao.TeacherDao;
 import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
-import com.katruk.entity.Teacher;
+import com.katruk.entity.impl.BaseTeacher;
+import com.katruk.entity.impl.BaseUser;
 import com.katruk.entity.User;
+import com.katruk.entity.Teacher;
 import com.katruk.exception.DaoException;
 import com.katruk.util.ConnectionPool;
 import com.katruk.util.Sql;
@@ -19,7 +21,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 public final class TeacherDaoMySql implements TeacherDao, DataBaseNames {
 
@@ -132,11 +133,11 @@ public final class TeacherDaoMySql implements TeacherDao, DataBaseNames {
 
   private Teacher getTeacher(ResultSet resultSet) throws SQLException {
     Long id = resultSet.getLong(USER_ID);
-    User user = new User(id);
+    User user = new BaseUser(id);
     Teacher.Position position = null;
     if (nonNull(resultSet.getString(POSITION))) {
       position = Teacher.Position.valueOf(resultSet.getString(POSITION));
     }
-    return new Teacher(id, user, position);
+    return new BaseTeacher(id, user, position);
   }
 }
