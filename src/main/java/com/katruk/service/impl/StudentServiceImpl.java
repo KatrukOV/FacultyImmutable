@@ -1,7 +1,7 @@
 package com.katruk.service.impl;
 
 import com.katruk.dao.StudentDao;
-import com.katruk.dao.mysql.StudentDaoMySql;
+import com.katruk.dao.mysql.student.StudentInMySql;
 import com.katruk.entity.User;
 import com.katruk.entity.Student;
 import com.katruk.exception.DaoException;
@@ -21,8 +21,8 @@ public final class StudentServiceImpl implements StudentService {
   private final UserService userService;
   private final Logger logger;
 
-  public StudentServiceImpl() {
-    this.studentDao = new StudentDaoMySql();
+  public StudentServiceImpl() throws ServiceException {
+    this.studentDao = new StudentInMySql();
     this.userService = new UserServiceImpl();
     this.logger = Logger.getLogger(StudentServiceImpl.class);
   }
@@ -38,9 +38,9 @@ public final class StudentServiceImpl implements StudentService {
     }
     Collection<User> users = this.userService.getAll();
     for (User user : users) {
-      students.stream().filter(student -> Objects.equals(user.getId(), student.getUser().getId()))
+      students.stream().filter(student -> Objects.equals(user.id(), student.user().id()))
           .forEach(student -> {
-            student.setUser(user);
+//            student.setUser(user);
           });
     }
     return students;
@@ -50,14 +50,13 @@ public final class StudentServiceImpl implements StudentService {
   public Student getStudentById(final Long studentId) throws ServiceException {
     final Student student;
     try {
-      student = this.studentDao.getStudentById(studentId)
-          .orElseThrow(() -> new DaoException("Student not found", new NoSuchElementException()));
+      student = this.studentDao.getStudentById(studentId);
     } catch (DaoException e) {
       logger.error("err", e);
       throw new ServiceException("err", e);
     }
-    final User user = this.userService.getUserById(student.getUser().getId());
-    student.setUser(user);
+    final User user = this.userService.getUserById(student.user().id());
+//    student.setUser(user);
     return student;
   }
 

@@ -1,9 +1,12 @@
-package com.katruk.dao.mysql;
+package com.katruk.dao.mysql.student;
 
 import static java.util.Objects.nonNull;
 
 import com.katruk.dao.StudentDao;
+import com.katruk.dao.UserDao;
+import com.katruk.dao.mysql.DataBaseNames;
 import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
+import com.katruk.dao.mysql.user.UsersInMySql;
 import com.katruk.entity.impl.BaseStudent;
 import com.katruk.entity.impl.BaseUser;
 import com.katruk.entity.User;
@@ -22,14 +25,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.NoSuchElementException;
 
-public final class StudentDaoMySql implements StudentDao, DataBaseNames {
+public final class StudentInMySql implements StudentDao, DataBaseNames {
 
   private final ConnectionPool connectionPool;
   private final Logger logger;
+  private final UserDao userDao;
 
-  public StudentDaoMySql() {
+  public StudentInMySql() {
     this.connectionPool = ConnectionPool.getInstance();
-    this.logger = Logger.getLogger(StudentDaoMySql.class);
+    this.logger = Logger.getLogger(StudentInMySql.class);
+    userDao = new UsersInMySql();
   }
 
   @Override
@@ -76,7 +81,8 @@ public final class StudentDaoMySql implements StudentDao, DataBaseNames {
     try (PreparedStatement statement = connection
         .prepareStatement(Sql.getInstance().get(Sql.REPLACE_STUDENT))) {
       fillSaveStudentStatement(student, statement);
-      statement.executeUpdate();
+      new CheckExecuteUpdate(statement, "Replace student failed, no rows affected.").check();
+      this.userDao.save(student.user());
       connection.commit();
     } catch (SQLException e) {
       connection.rollback();
