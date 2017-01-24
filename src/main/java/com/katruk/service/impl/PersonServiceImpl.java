@@ -1,7 +1,7 @@
 package com.katruk.service.impl;
 
 import com.katruk.dao.PersonDao;
-import com.katruk.dao.mysql.PersonDaoMySql;
+import com.katruk.dao.mysql.person.PersonDaoMySql;
 import com.katruk.entity.Person;
 import com.katruk.entity.impl.BasePerson;
 import com.katruk.exception.DaoException;

@@ -5,7 +5,7 @@ import static java.util.Objects.nonNull;
 import com.katruk.dao.PersonDao;
 import com.katruk.dao.UserDao;
 import com.katruk.dao.mysql.DataBaseNames;
-import com.katruk.dao.mysql.PersonDaoMySql;
+import com.katruk.dao.mysql.person.PersonDaoMySql;
 import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
 import com.katruk.entity.Person;
 import com.katruk.entity.impl.BaseUser;
