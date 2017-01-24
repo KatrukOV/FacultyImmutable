@@ -13,7 +13,7 @@ public interface SubjectDao {
 
   Collection<Subject> getSubjectByTeacher(final Long teacherId) throws DaoException;
 
-  Collection<Subject> getSubjectsByStudent(final Long studentId) throws DaoException;
+//  Collection<Subject> getSubjectsByStudent(final Long studentId) throws DaoException;
 
   Subject save(final Subject subject) throws DaoException;
 

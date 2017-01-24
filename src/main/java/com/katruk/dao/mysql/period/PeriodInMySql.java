@@ -1,6 +1,7 @@
-package com.katruk.dao.mysql;
+package com.katruk.dao.mysql.period;
 
 import com.katruk.dao.PeriodDao;
+import com.katruk.dao.mysql.DataBaseNames;
 import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
 import com.katruk.entity.impl.BasePeriod;
 import com.katruk.entity.Period;
@@ -20,14 +21,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.NoSuchElementException;
 
-public final class PeriodDaoMySql implements PeriodDao, DataBaseNames {
+public final class PeriodInMySql implements PeriodDao, DataBaseNames {
 
   private final ConnectionPool connectionPool;
   private final Logger logger;
 
-  public PeriodDaoMySql() {
+  public PeriodInMySql() {
     this.connectionPool = ConnectionPool.getInstance();
-    this.logger = Logger.getLogger(PeriodDaoMySql.class);
+    this.logger = Logger.getLogger(PeriodInMySql.class);
   }
 
   @Override

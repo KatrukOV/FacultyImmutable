@@ -1,9 +1,12 @@
-package com.katruk.dao.mysql;
+package com.katruk.dao.mysql.teacher;
 
 import static java.util.Objects.nonNull;
 
 import com.katruk.dao.TeacherDao;
+import com.katruk.dao.UserDao;
+import com.katruk.dao.mysql.DataBaseNames;
 import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
+import com.katruk.dao.mysql.user.UsersInMySql;
 import com.katruk.entity.impl.BaseTeacher;
 import com.katruk.entity.impl.BaseUser;
 import com.katruk.entity.User;
@@ -22,14 +25,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.NoSuchElementException;
 
-public final class TeacherDaoMySql implements TeacherDao, DataBaseNames {
+public final class TeacherInMySql implements TeacherDao, DataBaseNames {
 
   private final ConnectionPool connectionPool;
   private final Logger logger;
+  private final UserDao userDao;
 
-  public TeacherDaoMySql() {
+  public TeacherInMySql() {
     this.connectionPool = ConnectionPool.getInstance();
-    this.logger = Logger.getLogger(TeacherDaoMySql.class);
+    this.logger = Logger.getLogger(TeacherInMySql.class);
+    userDao = new UsersInMySql();
   }
 
   @Override
@@ -65,6 +70,7 @@ public final class TeacherDaoMySql implements TeacherDao, DataBaseNames {
       statement.setLong(1, teacher.user().id());
       statement.setString(2, teacher.position() != null ? teacher.position().name() : null);
       new CheckExecuteUpdate(statement, "Replace teacher failed, no rows affected.").check();
+      this.userDao.save(teacher.user());
       connection.commit();
     } catch (SQLException e) {
       connection.rollback();

@@ -1,7 +1,7 @@
 package com.katruk.service.impl;
 
 import com.katruk.dao.PeriodDao;
-import com.katruk.dao.mysql.PeriodDaoMySql;
+import com.katruk.dao.mysql.period.PeriodInMySql;
 import com.katruk.entity.Period;
 import com.katruk.exception.DaoException;
 import com.katruk.exception.ServiceException;
@@ -18,7 +18,7 @@ public final class PeriodServiceImpl implements PeriodService {
 
   public PeriodServiceImpl() {
     this.logger = Logger.getLogger(PeriodServiceImpl.class);
-    this.periodDao = new PeriodDaoMySql();
+    this.periodDao = new PeriodInMySql();
   }
 
   @Override

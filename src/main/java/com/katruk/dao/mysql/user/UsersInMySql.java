@@ -2,9 +2,12 @@ package com.katruk.dao.mysql.user;
 
 import static java.util.Objects.nonNull;
 
+import com.katruk.dao.PersonDao;
 import com.katruk.dao.UserDao;
 import com.katruk.dao.mysql.DataBaseNames;
+import com.katruk.dao.mysql.PersonDaoMySql;
 import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
+import com.katruk.entity.Person;
 import com.katruk.entity.impl.BaseUser;
 import com.katruk.entity.User;
 import com.katruk.entity.impl.BasePerson;
@@ -26,10 +29,12 @@ public final class UsersInMySql implements UserDao, DataBaseNames {
 
   private final ConnectionPool connectionPool;
   private final Logger logger;
+  private final PersonDao personDao;
 
-  public UsersInMySql() throws DaoException {
+  public UsersInMySql() {
     this.connectionPool = ConnectionPool.getInstance();
     this.logger = Logger.getLogger(UsersInMySql.class);
+    personDao = new PersonDaoMySql();
   }
 
   @Override
@@ -91,6 +96,7 @@ public final class UsersInMySql implements UserDao, DataBaseNames {
         .prepareStatement(Sql.getInstance().get(Sql.REPLACE_USER))) {
       fillSaveUserStatement(user, statement);
       new CheckExecuteUpdate(statement, "Replace user failed, no rows affected.").check();
+      this.personDao.save(user.person());
       connection.commit();
     } catch (SQLException e) {
       connection.rollback();
@@ -129,12 +135,12 @@ public final class UsersInMySql implements UserDao, DataBaseNames {
     String lastName = resultSet.getString(LAST_NAME);
     String name = resultSet.getString(NAME);
     String patronymic = resultSet.getString(PATRONYMIC);
-    BasePerson person = new BasePerson(id, lastName, name, patronymic);
+    Person person = new BasePerson(id, lastName, name, patronymic);
     String username = resultSet.getString(USERNAME);
     String password = resultSet.getString(PASSWORD);
-    BaseUser.Role role = null;
+    User.Role role = null;
     if (nonNull(resultSet.getString(ROLE))) {
-      role = BaseUser.Role.valueOf(resultSet.getString(ROLE));
+      role = User.Role.valueOf(resultSet.getString(ROLE));
     }
     return new BaseUser(id, person, username, password, role);
   }

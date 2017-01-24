@@ -25,11 +25,11 @@ public final class UserDaoCache implements UserDao {
 
   private Map<Long, User> loadUser() throws DaoException {
     Collection<User> allUser = this.userDao.allUser();
-    Map<Long, User> result = new HashMap<>();
+    Map<Long, User> userMap = new HashMap<>();
     for (User user : allUser) {
-      this.users.put(user.id(), user);
+      userMap.put(user.id(), user);
     }
-    return result;
+    return userMap;
   }
 
   @Override

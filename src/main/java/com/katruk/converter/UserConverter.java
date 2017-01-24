@@ -2,6 +2,7 @@ package com.katruk.converter;
 
 import static java.util.stream.Collectors.toList;
 
+import com.katruk.entity.Person;
 import com.katruk.entity.impl.BaseUser;
 import com.katruk.entity.User;
 import com.katruk.entity.impl.BasePerson;
@@ -24,7 +25,8 @@ public final class UserConverter {
   }
 
   public User convertToUser(UserDto userDto) {
-    BasePerson person = new BasePerson(userDto.getLastName(), userDto.getName(), userDto.getPatronymic());
+    Person person =
+        new BasePerson(userDto.getLastName(), userDto.getName(), userDto.getPatronymic());
     String username = userDto.getUsername();
     String password = encodePassword(userDto.getPassword());
     return new BaseUser(person, username, password);

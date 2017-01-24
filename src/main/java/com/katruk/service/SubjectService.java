@@ -15,7 +15,7 @@ public interface SubjectService {
 
   Collection<Subject> getSubjectByTeacher(final Teacher teacher) throws ServiceException;
 
-  Collection<Subject> getSubjectsByStudent(final Student student) throws ServiceException;
+//  Collection<Subject> getSubjectsByStudent(final Student student) throws ServiceException;
 
   Subject save(final Subject subject) throws ServiceException;
 

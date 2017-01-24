@@ -8,9 +8,9 @@ import java.util.Collection;
 
 public interface PersonService {
 
-  BasePerson getPersonById(final Long personId) throws ServiceException;
+  Person getPersonById(final Long personId) throws ServiceException;
 
-  BasePerson save(final BasePerson person) throws ServiceException;
+  Person save(final Person person) throws ServiceException;
 
   Collection<Person> getAll() throws ServiceException;
 }

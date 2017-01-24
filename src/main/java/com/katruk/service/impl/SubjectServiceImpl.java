@@ -40,7 +40,7 @@ public final class SubjectServiceImpl implements SubjectService {
     Collection<Teacher> teachers = this.teacherService.getAll();
     for (Subject subject : subjects) {
       teachers.stream()
-          .filter(teacher -> Objects.equals(subject.getTeacher().getId(), teacher.getId()))
+          .filter(teacher -> Objects.equals(subject.teacher().id(), teacher.id()))
           .forEach(subject::setTeacher);
     }
     return subjects;
@@ -50,13 +50,12 @@ public final class SubjectServiceImpl implements SubjectService {
   public Subject getSubjectById(final Long subjectId) throws ServiceException {
     final Subject subject;
     try {
-      subject = this.subjectDao.getSubjectById(subjectId)
-          .orElseThrow(() -> new DaoException("Subject not found", new NoSuchElementException()));
+      subject = this.subjectDao.getSubjectById(subjectId);
     } catch (DaoException e) {
       logger.error("err", e);
       throw new ServiceException("err", e);
     }
-    final Teacher teacher = this.teacherService.getTeacherById(subject.getTeacher().getId());
+    final Teacher teacher = this.teacherService.getTeacherById(subject.teacher().id());
     subject.setTeacher(teacher);
     return subject;
   }
@@ -79,23 +78,23 @@ public final class SubjectServiceImpl implements SubjectService {
     return subjects;
   }
 
-  @Override
-  public Collection<Subject> getSubjectsByStudent(final Student student) throws ServiceException {
-    Collection<Subject> subjects;
-    try {
-      subjects = this.subjectDao.getSubjectsByStudent(student.getId());
-    } catch (DaoException e) {
-      logger.error("err", e);
-      throw new ServiceException("err", e);
-    }
-    Collection<Teacher> teachers = this.teacherService.getAll();
-    for (Subject subject : subjects) {
-      teachers.stream()
-          .filter(teacher -> Objects.equals(subject.getTeacher().getId(), teacher.getId()))
-          .forEach(subject::setTeacher);
-    }
-    return subjects;
-  }
+//  @Override
+//  public Collection<Subject> getSubjectsByStudent(final Student student) throws ServiceException {
+//    Collection<Subject> subjects;
+//    try {
+//      subjects = this.subjectDao.getSubjectsByStudent(student.id());
+//    } catch (DaoException e) {
+//      logger.error("err", e);
+//      throw new ServiceException("err", e);
+//    }
+//    Collection<Teacher> teachers = this.teacherService.getAll();
+//    for (Subject subject : subjects) {
+//      teachers.stream()
+//          .filter(teacher -> Objects.equals(subject.teacher().id(), teacher.id()))
+//          .forEach(subject::setTeacher);
+//    }
+//    return subjects;
+//  }
 
   @Override
   public Subject save(final Subject subject) throws ServiceException {

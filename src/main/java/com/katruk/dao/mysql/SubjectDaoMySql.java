@@ -72,19 +72,19 @@ public final class SubjectDaoMySql implements SubjectDao, DataBaseNames {
     }
   }
 
-  @Override
-  public Collection<Subject> getSubjectsByStudent(final Long studentId) throws DaoException {
-    try (Connection connection = this.connectionPool.getConnection();
-         PreparedStatement statement = connection
-             .prepareStatement(Sql.getInstance().get(Sql.GET_SUBJECT_BY_STUDENT))) {
-      statement.setLong(1, studentId);
-      return getSubjectByStatement(statement);
-    } catch (SQLException e) {
-      logger.error(String.format("Cannot get subjects by student with id: %d.", studentId), e);
-      throw new DaoException(String.format
-          ("Cannot get subjects by student with id: %d.", studentId), e);
-    }
-  }
+//  @Override
+//  public Collection<Subject> getSubjectsByStudent(final Long studentId) throws DaoException {
+//    try (Connection connection = this.connectionPool.getConnection();
+//         PreparedStatement statement = connection
+//             .prepareStatement(Sql.getInstance().get(Sql.GET_SUBJECT_BY_STUDENT))) {
+//      statement.setLong(1, studentId);
+//      return getSubjectByStatement(statement);
+//    } catch (SQLException e) {
+//      logger.error(String.format("Cannot get subjects by student with id: %d.", studentId), e);
+//      throw new DaoException(String.format
+//          ("Cannot get subjects by student with id: %d.", studentId), e);
+//    }
+//  }
 
   @Override
   public Subject save(final Subject subject) throws DaoException {
