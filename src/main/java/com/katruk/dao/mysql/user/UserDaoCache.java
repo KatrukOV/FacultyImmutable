@@ -1,38 +1,51 @@
 package com.katruk.dao.mysql.user;
 
-import com.katruk.dao.cache.Cache;
-import com.katruk.dao.cache.GenericCache;
 import com.katruk.dao.UserDao;
 import com.katruk.entity.User;
 import com.katruk.exception.DaoException;
+
 import org.apache.log4j.Logger;
+
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.concurrent.ConcurrentHashMap;
 
 public final class UserDaoCache implements UserDao {
 
   private final Logger logger;
   private final UserDao userDao;
-  private final Cache<Long, User> users;
+  private final Map<Long, User> users;
+  private static final UserDaoCache userDaoCache = new UserDaoCache(new UsersInMySql());
 
-  public UserDaoCache(UserDao userDao) throws DaoException {
+  public static UserDaoCache getInstance() {
+    return userDaoCache;
+  }
+
+  private UserDaoCache(UserDao userDao) {
     this.logger = Logger.getLogger(UserDaoCache.class);
     this.userDao = userDao;
     this.users = loadUser();
   }
 
-  private Cache<Long, User> loadUser() throws DaoException {
-    Collection<User> allUser = this.userDao.allUser();
-    Cache<Long, User> userMap = new GenericCache<>();
+  private Map<Long, User> loadUser() {
+    Collection<User> allUser;
+    try {
+      allUser = this.userDao.allUser();
+    } catch (DaoException e) {
+      this.logger.error("Can't load all user.", e);
+      return Collections.emptyMap();
+    }
+    Map<Long, User> userMap = new ConcurrentHashMap<>();
     for (User user : allUser) {
-      userMap.setValueIfAbsent(user.id(), user);
+      userMap.put(user.id(), user);
     }
     return userMap;
   }
 
   @Override
   public Collection<User> allUser() throws DaoException {
-
     return this.users.values();
   }
 
@@ -52,6 +65,7 @@ public final class UserDaoCache implements UserDao {
   public User findUserById(final Long userId) throws DaoException {
     for (User user : this.users.values()) {
       if (user.id().equals(userId)) {
+        logger.debug(String.format("Find user in cache with id: %d", userId));
         return user;
       }
     }
@@ -65,6 +79,7 @@ public final class UserDaoCache implements UserDao {
     User userInDB = this.userDao.save(user);
     this.users.remove(userInDB.id());
     this.users.put(userInDB.id(), userInDB);
+    logger.debug("Save user in cache.");
     return userInDB;
   }
 }
