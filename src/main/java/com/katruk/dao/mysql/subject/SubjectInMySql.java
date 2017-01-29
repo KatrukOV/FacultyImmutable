@@ -1,8 +1,9 @@
-package com.katruk.dao.mysql;
+package com.katruk.dao.mysql.subject;
 
 import static java.util.Objects.isNull;
 
 import com.katruk.dao.SubjectDao;
+import com.katruk.dao.mysql.DataBaseNames;
 import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
 import com.katruk.entity.Subject;
 import com.katruk.entity.Teacher;
@@ -23,14 +24,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.NoSuchElementException;
 
-public final class SubjectDaoMySql implements SubjectDao, DataBaseNames {
+public final class SubjectInMySql implements SubjectDao, DataBaseNames {
 
   private final ConnectionPool connectionPool;
   private final Logger logger;
 
-  public SubjectDaoMySql() {
+  public SubjectInMySql() {
     this.connectionPool = ConnectionPool.getInstance();
-    this.logger = Logger.getLogger(SubjectDaoMySql.class);
+    this.logger = Logger.getLogger(SubjectInMySql.class);
   }
 
   @Override
@@ -71,20 +72,6 @@ public final class SubjectDaoMySql implements SubjectDao, DataBaseNames {
           ("Cannot get subjects by teacher with id: %d.", teacherId), e);
     }
   }
-
-//  @Override
-//  public Collection<Subject> getSubjectsByStudent(final Long studentId) throws DaoException {
-//    try (Connection connection = this.connectionPool.getConnection();
-//         PreparedStatement statement = connection
-//             .prepareStatement(Sql.getInstance().get(Sql.GET_SUBJECT_BY_STUDENT))) {
-//      statement.setLong(1, studentId);
-//      return getSubjectByStatement(statement);
-//    } catch (SQLException e) {
-//      logger.error(String.format("Cannot get subjects by student with id: %d.", studentId), e);
-//      throw new DaoException(String.format
-//          ("Cannot get subjects by student with id: %d.", studentId), e);
-//    }
-//  }
 
   @Override
   public Subject save(final Subject subject) throws DaoException {

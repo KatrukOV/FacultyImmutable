@@ -1,21 +1,19 @@
 package com.katruk.dao.mysql.user;
 
+import com.katruk.dao.cache.Cache;
+import com.katruk.dao.cache.GenericCache;
 import com.katruk.dao.UserDao;
 import com.katruk.entity.User;
 import com.katruk.exception.DaoException;
-
 import org.apache.log4j.Logger;
-
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 public final class UserDaoCache implements UserDao {
 
   private final Logger logger;
   private final UserDao userDao;
-  private final Map<Long, User> users;
+  private final Cache<Long, User> users;
 
   public UserDaoCache(UserDao userDao) throws DaoException {
     this.logger = Logger.getLogger(UserDaoCache.class);
@@ -23,17 +21,18 @@ public final class UserDaoCache implements UserDao {
     this.users = loadUser();
   }
 
-  private Map<Long, User> loadUser() throws DaoException {
+  private Cache<Long, User> loadUser() throws DaoException {
     Collection<User> allUser = this.userDao.allUser();
-    Map<Long, User> userMap = new HashMap<>();
+    Cache<Long, User> userMap = new GenericCache<>();
     for (User user : allUser) {
-      userMap.put(user.id(), user);
+      userMap.setValueIfAbsent(user.id(), user);
     }
     return userMap;
   }
 
   @Override
   public Collection<User> allUser() throws DaoException {
+
     return this.users.values();
   }
 

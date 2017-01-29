@@ -1,8 +1,7 @@
 package com.katruk.service.impl;
 
 import com.katruk.dao.SubjectDao;
-import com.katruk.dao.mysql.SubjectDaoMySql;
-import com.katruk.entity.Student;
+import com.katruk.dao.mysql.subject.SubjectInMySql;
 import com.katruk.entity.Subject;
 import com.katruk.entity.Teacher;
 import com.katruk.exception.DaoException;
@@ -13,7 +12,6 @@ import com.katruk.service.TeacherService;
 import org.apache.log4j.Logger;
 
 import java.util.Collection;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public final class SubjectServiceImpl implements SubjectService {
@@ -23,7 +21,7 @@ public final class SubjectServiceImpl implements SubjectService {
   private final Logger logger;
 
   public SubjectServiceImpl() {
-    this.subjectDao = new SubjectDaoMySql();
+    this.subjectDao = new SubjectInMySql();
     this.teacherService = new TeacherServiceImpl();
     this.logger = Logger.getLogger(SubjectServiceImpl.class);
   }
