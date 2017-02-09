@@ -2,8 +2,6 @@ package com.katruk.service.impl;
 
 import com.katruk.dao.EvaluationDao;
 import com.katruk.dao.mysql.EvaluationDaoMySql;
-import com.katruk.entity.Evaluation;
-import com.katruk.entity.Student;
 import com.katruk.entity.Subject;
 import com.katruk.exception.DaoException;
 import com.katruk.exception.ServiceException;

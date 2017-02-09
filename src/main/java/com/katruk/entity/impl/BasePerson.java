@@ -7,7 +7,6 @@ public final class BasePerson extends BaseModel implements Person {
 
   private final String lastName;
   private final String name;
-  private final String patronymic;
 
 //  public BasePerson(Long id) {
 //    super(id);

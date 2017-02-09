@@ -2,9 +2,9 @@ package com.katruk.service.impl;
 
 import com.katruk.dao.UserDao;
 import com.katruk.dao.mysql.user.UsersInMySql;
-import com.katruk.entity.impl.BaseUser;
+import com.katruk.entity.user.mysql.UserMySql;
 import com.katruk.entity.Person;
-import com.katruk.entity.User;
+import com.katruk.entity.user.User;
 import com.katruk.exception.DaoException;
 import com.katruk.exception.ServiceException;
 import com.katruk.service.PersonService;
@@ -86,7 +86,7 @@ public final class UserServiceImpl implements UserService {
   public User save(final User user) throws ServiceException {
     final Person person = this.personService.save(user.person());
     final User userForSave =
-        new BaseUser(person.id(), person, user.username(), user.password(), user.role());
+        new UserMySql(person.id(), person, user.username(), user.password(), user.role());
     try {
       return this.userDao.save(userForSave);
     } catch (DaoException e) {

@@ -1,6 +1,5 @@
 package com.katruk.dao;
 
-import com.katruk.entity.Period;
 import com.katruk.exception.DaoException;
 
 public interface PeriodDao {

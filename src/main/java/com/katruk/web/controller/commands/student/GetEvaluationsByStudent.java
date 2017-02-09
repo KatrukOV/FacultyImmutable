@@ -1,8 +1,7 @@
 package com.katruk.web.controller.commands.student;
 
 import com.katruk.converter.EvaluationConverter;
-import com.katruk.entity.User;
-import com.katruk.entity.Evaluation;
+import com.katruk.entity.user.User;
 import com.katruk.exception.ServiceException;
 import com.katruk.service.EvaluationService;
 import com.katruk.service.UserService;

@@ -1,7 +1,7 @@
 package com.katruk.web.controller.commands;
 
 import com.katruk.converter.UserConverter;
-import com.katruk.entity.User;
+import com.katruk.entity.user.User;
 import com.katruk.entity.dto.UserDto;
 import com.katruk.exception.ServiceException;
 import com.katruk.exception.ValidateException;

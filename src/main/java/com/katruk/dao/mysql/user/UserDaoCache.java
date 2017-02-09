@@ -1,7 +1,7 @@
 package com.katruk.dao.mysql.user;
 
 import com.katruk.dao.UserDao;
-import com.katruk.entity.User;
+import com.katruk.entity.user.User;
 import com.katruk.exception.DaoException;
 
 import org.apache.log4j.Logger;

@@ -1,7 +1,7 @@
 package com.katruk.web.controller.commands.admin;
 
 import com.katruk.converter.UserConverter;
-import com.katruk.entity.User;
+import com.katruk.entity.user.User;
 import com.katruk.exception.ServiceException;
 import com.katruk.service.UserService;
 import com.katruk.service.impl.UserServiceImpl;

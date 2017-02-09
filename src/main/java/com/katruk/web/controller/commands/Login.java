@@ -3,10 +3,7 @@ package com.katruk.web.controller.commands;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
-import com.katruk.entity.Period;
-import com.katruk.entity.Student;
-import com.katruk.entity.Teacher;
-import com.katruk.entity.User;
+import com.katruk.entity.user.User;
 import com.katruk.exception.ServiceException;
 import com.katruk.service.PeriodService;
 import com.katruk.service.StudentService;

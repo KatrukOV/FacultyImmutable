@@ -2,8 +2,7 @@ package com.katruk.web.controller.commands.teacher;
 
 import com.katruk.converter.SubjectConverter;
 import com.katruk.entity.Subject;
-import com.katruk.entity.Teacher;
-import com.katruk.entity.User;
+import com.katruk.entity.user.User;
 import com.katruk.exception.ServiceException;
 import com.katruk.service.SubjectService;
 import com.katruk.service.TeacherService;

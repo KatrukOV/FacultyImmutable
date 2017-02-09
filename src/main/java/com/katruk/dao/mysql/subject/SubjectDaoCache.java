@@ -3,7 +3,6 @@ package com.katruk.dao.mysql.subject;
 import com.katruk.dao.SubjectDao;
 import com.katruk.dao.TeacherDao;
 import com.katruk.entity.Subject;
-import com.katruk.entity.Teacher;
 import com.katruk.exception.DaoException;
 
 import org.apache.log4j.Logger;
@@ -11,7 +10,6 @@ import org.apache.log4j.Logger;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 public final class SubjectDaoCache implements TeacherDao {
 

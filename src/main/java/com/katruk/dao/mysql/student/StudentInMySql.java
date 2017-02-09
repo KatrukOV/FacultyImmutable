@@ -8,9 +8,8 @@ import com.katruk.dao.mysql.DataBaseNames;
 import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
 import com.katruk.dao.mysql.user.UsersInMySql;
 import com.katruk.entity.impl.BaseStudent;
-import com.katruk.entity.impl.BaseUser;
-import com.katruk.entity.User;
-import com.katruk.entity.Student;
+import com.katruk.entity.user.mysql.UserMySql;
+import com.katruk.entity.user.User;
 import com.katruk.exception.DaoException;
 import com.katruk.util.ConnectionPool;
 import com.katruk.util.Sql;
@@ -144,7 +143,7 @@ public final class StudentInMySql implements StudentDao, DataBaseNames {
 
   private Student getStudent(ResultSet resultSet) throws SQLException {
     Long id = resultSet.getLong(USER_ID);
-    User user = new BaseUser(id);
+    User user = new UserMySql(id);
     Student.Form form = null;
     resultSet.getString(FORM);
     if (nonNull(resultSet.getString(FORM))) {

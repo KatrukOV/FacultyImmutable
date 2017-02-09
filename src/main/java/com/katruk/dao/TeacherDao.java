@@ -1,6 +1,5 @@
 package com.katruk.dao;
 
-import com.katruk.entity.Teacher;
 import com.katruk.exception.DaoException;
 
 import java.util.Collection;

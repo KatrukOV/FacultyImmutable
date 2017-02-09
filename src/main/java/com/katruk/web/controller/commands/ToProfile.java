@@ -1,7 +1,6 @@
 package com.katruk.web.controller.commands;
 
-import com.katruk.entity.impl.BaseUser;
-import com.katruk.entity.Period;
+import com.katruk.entity.user.mysql.UserMySql;
 import com.katruk.exception.ServiceException;
 import com.katruk.service.PeriodService;
 import com.katruk.service.impl.PeriodServiceImpl;
@@ -29,8 +28,8 @@ public final class ToProfile implements Command, PageAttribute {
   public String execute(HttpServletRequest request, HttpServletResponse response) {
     String page = PageConfig.getInstance().getValue(PageConfig.PROFILE);
     HttpSession session = request.getSession();
-    BaseUser.Role role = (BaseUser.Role) session.getAttribute(ROLE);
-    if (role.equals(BaseUser.Role.ADMIN)) {
+    UserMySql.Role role = (UserMySql.Role) session.getAttribute(ROLE);
+    if (role.equals(UserMySql.Role.ADMIN)) {
       page = PageConfig.getInstance().getValue(PageConfig.ADMIN_PROFILE);
       Period period;
       try {

@@ -1,7 +1,6 @@
 package com.katruk.web.controller.commands.admin;
 
 import com.katruk.converter.TeacherConverter;
-import com.katruk.entity.Teacher;
 import com.katruk.exception.ServiceException;
 import com.katruk.service.TeacherService;
 import com.katruk.service.impl.TeacherServiceImpl;

@@ -3,10 +3,8 @@ package com.katruk.web.controller.commands.admin;
 import static java.util.Objects.nonNull;
 
 import com.katruk.converter.UserConverter;
-import com.katruk.entity.impl.BaseUser;
-import com.katruk.entity.User;
-import com.katruk.entity.Student;
-import com.katruk.entity.Teacher;
+import com.katruk.entity.user.mysql.UserMySql;
+import com.katruk.entity.user.User;
 import com.katruk.exception.ServiceException;
 import com.katruk.service.StudentService;
 import com.katruk.service.TeacherService;
@@ -45,7 +43,7 @@ public final class SetRole implements Command, PageAttribute {
   public String execute(final HttpServletRequest request, final HttpServletResponse response) {
     String page = PageConfig.getInstance().getValue(PageConfig.USERS);
     try {
-      BaseUser.Role role = BaseUser.Role.valueOf(request.getParameter(ROLE));
+      UserMySql.Role role = UserMySql.Role.valueOf(request.getParameter(ROLE));
       Long userId = Long.parseLong(request.getParameter(USER_ID));
       User user = this.userService.getUserById(userId);
       if (nonNull(user.getRole())&&!role.equals(user.getRole())) {

@@ -1,8 +1,6 @@
 package com.katruk.entity.impl;
 
-import com.katruk.entity.Model;
 import com.katruk.entity.Subject;
-import com.katruk.entity.Teacher;
 
 public final class BaseSubject extends BaseModel implements Subject {
 

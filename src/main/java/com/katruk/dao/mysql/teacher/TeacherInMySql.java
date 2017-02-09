@@ -8,9 +8,8 @@ import com.katruk.dao.mysql.DataBaseNames;
 import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
 import com.katruk.dao.mysql.user.UsersInMySql;
 import com.katruk.entity.impl.BaseTeacher;
-import com.katruk.entity.impl.BaseUser;
-import com.katruk.entity.User;
-import com.katruk.entity.Teacher;
+import com.katruk.entity.user.mysql.UserMySql;
+import com.katruk.entity.user.User;
 import com.katruk.exception.DaoException;
 import com.katruk.util.ConnectionPool;
 import com.katruk.util.Sql;
@@ -139,7 +138,7 @@ public final class TeacherInMySql implements TeacherDao, DataBaseNames {
 
   private Teacher getTeacher(ResultSet resultSet) throws SQLException {
     Long id = resultSet.getLong(USER_ID);
-    User user = new BaseUser(id);
+    User user = new UserMySql(id);
     Teacher.Position position = null;
     if (nonNull(resultSet.getString(POSITION))) {
       position = Teacher.Position.valueOf(resultSet.getString(POSITION));

@@ -6,7 +6,5 @@ public interface Person extends Model {
 
   String name();
 
-  String patronymic();
-
   Person addId(Long id);
 }

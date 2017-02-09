@@ -8,8 +8,8 @@ import com.katruk.dao.mysql.DataBaseNames;
 import com.katruk.dao.mysql.person.PersonDaoMySql;
 import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
 import com.katruk.entity.Person;
-import com.katruk.entity.impl.BaseUser;
-import com.katruk.entity.User;
+import com.katruk.entity.user.mysql.UserMySql;
+import com.katruk.entity.user.User;
 import com.katruk.entity.impl.BasePerson;
 import com.katruk.exception.DaoException;
 import com.katruk.util.ConnectionPool;
@@ -142,6 +142,6 @@ public final class UsersInMySql implements UserDao, DataBaseNames {
     if (nonNull(resultSet.getString(ROLE))) {
       role = User.Role.valueOf(resultSet.getString(ROLE));
     }
-    return new BaseUser(id, person, username, password, role);
+    return new UserMySql(id, person, username, password, role);
   }
 }

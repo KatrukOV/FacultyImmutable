@@ -1,9 +1,6 @@
 package com.katruk.dao.mysql.teacher;
 
 import com.katruk.dao.TeacherDao;
-import com.katruk.dao.UserDao;
-import com.katruk.entity.Teacher;
-import com.katruk.entity.User;
 import com.katruk.exception.DaoException;
 
 import org.apache.log4j.Logger;

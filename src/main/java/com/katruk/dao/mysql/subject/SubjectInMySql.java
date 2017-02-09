@@ -6,7 +6,6 @@ import com.katruk.dao.SubjectDao;
 import com.katruk.dao.mysql.DataBaseNames;
 import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
 import com.katruk.entity.Subject;
-import com.katruk.entity.Teacher;
 import com.katruk.entity.impl.BaseSubject;
 import com.katruk.entity.impl.BaseTeacher;
 import com.katruk.exception.DaoException;

@@ -5,10 +5,7 @@ import static java.util.Objects.nonNull;
 
 import com.katruk.dao.EvaluationDao;
 import com.katruk.dao.mysql.checkExecute.CheckExecuteUpdate;
-import com.katruk.entity.Evaluation;
-import com.katruk.entity.Student;
 import com.katruk.entity.Subject;
-import com.katruk.entity.impl.BaseEvaluation;
 import com.katruk.entity.impl.BaseStudent;
 import com.katruk.entity.impl.BaseSubject;
 import com.katruk.exception.DaoException;

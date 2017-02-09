@@ -1,7 +1,5 @@
 package com.katruk.web.controller.commands.admin;
 
-import com.katruk.entity.impl.BasePeriod;
-import com.katruk.entity.Period;
 import com.katruk.exception.ServiceException;
 import com.katruk.service.PeriodService;
 import com.katruk.service.impl.PeriodServiceImpl;

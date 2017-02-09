@@ -1,17 +1,9 @@
 package com.katruk.dao.mysql.period;
 
 import com.katruk.dao.PeriodDao;
-import com.katruk.dao.UserDao;
-import com.katruk.entity.Period;
-import com.katruk.entity.User;
 import com.katruk.exception.DaoException;
 
 import org.apache.log4j.Logger;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.NoSuchElementException;
 
 public final class PeriodDaoCache implements PeriodDao {
 

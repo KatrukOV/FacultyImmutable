@@ -1,6 +1,6 @@
 package com.katruk.service;
 
-import com.katruk.entity.User;
+import com.katruk.entity.user.User;
 import com.katruk.exception.ServiceException;
 
 import java.util.Collection;

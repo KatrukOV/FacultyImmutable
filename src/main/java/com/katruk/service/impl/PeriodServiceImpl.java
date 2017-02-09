@@ -2,7 +2,6 @@ package com.katruk.service.impl;
 
 import com.katruk.dao.PeriodDao;
 import com.katruk.dao.mysql.period.PeriodInMySql;
-import com.katruk.entity.Period;
 import com.katruk.exception.DaoException;
 import com.katruk.exception.ServiceException;
 import com.katruk.service.PeriodService;

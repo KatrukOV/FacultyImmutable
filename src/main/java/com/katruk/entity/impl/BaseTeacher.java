@@ -1,8 +1,6 @@
 package com.katruk.entity.impl;
 
-import com.katruk.entity.Model;
-import com.katruk.entity.Teacher;
-import com.katruk.entity.User;
+import com.katruk.entity.user.User;
 
 public final class BaseTeacher extends BaseModel implements Teacher {
 

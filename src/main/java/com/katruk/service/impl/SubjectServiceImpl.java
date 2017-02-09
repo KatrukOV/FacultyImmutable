@@ -3,7 +3,6 @@ package com.katruk.service.impl;
 import com.katruk.dao.SubjectDao;
 import com.katruk.dao.mysql.subject.SubjectInMySql;
 import com.katruk.entity.Subject;
-import com.katruk.entity.Teacher;
 import com.katruk.exception.DaoException;
 import com.katruk.exception.ServiceException;
 import com.katruk.service.SubjectService;

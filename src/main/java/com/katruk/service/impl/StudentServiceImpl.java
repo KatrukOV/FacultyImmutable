@@ -2,8 +2,7 @@ package com.katruk.service.impl;
 
 import com.katruk.dao.StudentDao;
 import com.katruk.dao.mysql.student.StudentInMySql;
-import com.katruk.entity.User;
-import com.katruk.entity.Student;
+import com.katruk.entity.user.User;
 import com.katruk.exception.DaoException;
 import com.katruk.exception.ServiceException;
 import com.katruk.service.StudentService;
@@ -12,7 +11,6 @@ import com.katruk.service.UserService;
 import org.apache.log4j.Logger;
 
 import java.util.Collection;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public final class StudentServiceImpl implements StudentService {
